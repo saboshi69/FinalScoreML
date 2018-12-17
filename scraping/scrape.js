@@ -1,44 +1,7 @@
-const bodyParser = require('body-parser')
-//const express = require('express')
-const request = require('request')
 const fs = require('fs')
-const fetch = require('node-fetch')
 const puppeteer = require('puppeteer');
+const mydate = require('./periods')
 
-
-let testDate2 = [
-    [20160101, 20160131],
-    [20160201, 20160229],
-    [20160301, 20160331]
-]
-
-
-class Service {
-    constructor() {}
-    getPage(data) {
-        return new Promise((resolve, reject) => {
-            let page = Math.ceil(parseInt(data[0].matchescount) / 20)
-            resolve(page)
-        })
-
-    }
-
-    copyData(data) {
-        return new Promise((resolve, reject) => {
-            let sData = JSON.stringify(data)
-            fs.writeFile('data.json', sData, 'utf8', (err) => {
-                if (err) {
-                    console.log("Cannot write data.json")
-                } else {
-                    console.log("Successfully create data.json")
-                    resolve(latestData)
-                }
-            })
-        })
-    }
-}
-
-let service = new Service;
 
 async function getInit(url) {
     const browser = await puppeteer.launch({
@@ -47,7 +10,7 @@ async function getInit(url) {
     const page = await browser.newPage();
     await page._client.send('Network.getCookies');
     await page.goto(url);
-    await page.waitFor(2500);
+    await page.waitFor(6000);
     const result = await page.evaluate(() => {
         let data = document.querySelector('body pre').innerText;
         return {
@@ -59,24 +22,63 @@ async function getInit(url) {
 };
 
 
-
+//add catch block
 const grab = async (dateArr) => {
     let months = dateArr.length
-    let results = []
+    let result = []
     for (let i = 0; i < months; i++) {
+        console.log("this is loop cycle: " + i)
         let startDate = dateArr[i][0]
         let endDate = dateArr[i][1]
         let page = 1
-        //let defaultUrl = `https://bet.hkjc.com/football/getJSON.aspx?jsontype=search_result.aspx&startdate=${startDate}&enddate=${endDate}&teamid=default`
         let url = `https://bet.hkjc.com/football/getJSON.aspx?jsontype=search_result.aspx&startdate=${startDate}&enddate=${endDate}&teamid=default&pageno=${page}`
-        console.log("now scarping: " + url)
         await getInit(url)
-            .then((data) => {
-                let jD = data.data
-                let jDa = JSON.parse(jD)
-                console.log(jDa[0].matchescount)
+            .then(async (data) => {
+                try{
+                    let jD = data.data
+                    let jDa = JSON.parse(jD)
+                    let pages = Math.ceil(parseInt(jDa[0].matchescount) / 20)
+                    for (let pp = 1, ppp = 1 ; pp < pages; pp++, ppp++) {
+                        let urll = await `https://bet.hkjc.com/football/getJSON.aspx?jsontype=search_result.aspx&startdate=${startDate}&enddate=${endDate}&teamid=default&pageno=${ppp}`
+                        let dd = await getInit(urll)
+                        .catch(err => console.log(err));
+                        console.log("now scarping: " + urll)
+                        let jjD = dd.data
+                        let jjDa = JSON.parse(jjD)
+                        jjDa[0].matches.forEach(async (r) => {
+                            
+                            if (r.accumulatedscore[1].away != -1) {
+                                let home = r.hadodds.H
+                                let away = r.hadodds.A
+                                let draw = r.hadodds.D
+                                let t0 = r.ttgodds.P0
+                                let t1 = r.ttgodds.P1
+                                let t2 = r.ttgodds.P2
+                                let t3 = r.ttgodds.P3
+                                let t4 = r.ttgodds.P4
+                                let t5 = r.ttgodds.P5
+                                let t6 = r.ttgodds.P6
+                                let t7 = r.ttgodds.M7
+                                let homeGoal = r.accumulatedscore[1].home
+                                let awayGoal = r.accumulatedscore[1].away
+                                let homeTeam = r.homeTeam.teamNameEN
+                                let awayTeam = r.awayTeam.teamNameEN
+                                let leagueName = r.league.leagueNameEN
+                                let shortDivName = r.league.leagueShortName
+                                let date = r.matchDate
+                                result = [home, away, draw, t0, t1, t2, t3, t4, t5, t6, t7, homeGoal, awayGoal]
+                                result = result.map((el) => parseFloat(el.replace(/100@/, '')))
+                                result = [...result, homeTeam, awayTeam, leagueName, shortDivName, date]
+                                await fs.appendFile(`./data/oddsData.json`, JSON.stringify(result) + ',', err => (err) ? console.log(err) : console.log(date + ': '+ r.matchID))
+                            }
+                        })
+    
+                    }
+                }catch (err){
+                    console.log(err)
+                }
             })
     }
 }
 
-grab(testDate2)
+grab(mydate)
