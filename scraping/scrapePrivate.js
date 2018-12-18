@@ -33,15 +33,22 @@ const grab = async (dateArr) => {
         let page = 1
         let url = `https://bet.hkjc.com/football/getJSON.aspx?jsontype=search_result.aspx&startdate=${startDate}&enddate=${endDate}&teamid=default&pageno=${page}`
         await getInit(url)
-            .then(async (data) => {
-                try{
+        .then(async (data) => {
+            try{
                     let jD = data.data
                     let jDa = JSON.parse(jD)
                     let pages = Math.ceil(parseInt(jDa[0].matchescount) / 20)
                     for (let pp = 1, ppp = 1 ; pp < pages; pp++, ppp++) {
                         let urll = await `https://bet.hkjc.com/football/getJSON.aspx?jsontype=search_result.aspx&startdate=${startDate}&enddate=${endDate}&teamid=default&pageno=${ppp}`
                         let dd = await getInit(urll)
-                        .catch(err => console.log(err));
+                        .catch(err => {
+                            console.log(err)
+                            console.log("err, ppp now: "+ ppp)
+                            setTimeout(() => {                               
+                                ppp--
+                                console.log("retry, ppp -1: "+ppp)
+                            }, 25000);
+                        });
                         console.log("now scarping: " + urll)
                         let jjD = dd.data
                         let jjDa = JSON.parse(jjD)
@@ -78,6 +85,15 @@ const grab = async (dateArr) => {
                     console.log(err)
                 }
             })
+        .catch((err)=>{
+            console.log("oppos getInit(url) not working")
+            console.log(err)
+            setTimeout(() => {
+                console.log("we are trying loop: "+ i)
+                i--
+                console.log("rollback one loop to loop: "+ i)
+            }, 25000);
+        })
     }
 }
 
