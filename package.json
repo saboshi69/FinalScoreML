@@ -18,6 +18,7 @@
   "homepage": "https://github.com/saboshi69/FinalScoreML#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "lodash": "^4.17.11",
     "node-fetch": "^2.3.0",
     "puppeteer": "^1.10.0",
     "request": "^2.88.0"
