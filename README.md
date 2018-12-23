@@ -3,16 +3,16 @@
 ###Predict Home win / Draw / Away Win using KNN-model on Javascript
 
 
-============================= WARNING ===========================
-###Please DONT USE IT ON REAL GAMES AS IT COULD TAKE ALL YOUR MONEY 
-============================= WARNING ===========================
+
+###WARNING: Please DONT USE IT ON REAL GAMES AS IT COULD TAKE ALL YOUR MONEY ###
+
 
 
 
 This model could ONLY predict which team is going to win, base on odds.(about 65% win rate)
 
 
-###How to use it:
+###How to use it:###
 
 1. Path to the directory
 2. node run.js
