@@ -1,3 +1,6 @@
 node_modules/
 scraping/periodsPrivate1.js
 scraping/scrapePrivate1.js
+.env
+scraping/data/oddsDataExtra.json
+scraping/data/oddsExtra.js
