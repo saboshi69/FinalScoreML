@@ -25,13 +25,13 @@ You can visit the link below if you don't get it.
 https://www.npmjs.com/package/dotenv
 
 Here's the file format:
-DB_USER=*yourUserName*
-DB_PASS=*yourUserPassword*
-DB_A1=*yourFirstSecurityAnswer*
-DB_A2=*yourSecondSecurityAnswer*
-DB_A3=*yourThirdSecurityAnswer*
-DB_Q1=*yourFirstSecurityQuestion*
-DB_Q2=*yourSecondSecurityQuestion*
+DB_USER=*yourUserName* <br>
+DB_PASS=*yourUserPassword* <br>
+DB_A1=*yourFirstSecurityAnswer* <br>
+DB_A2=*yourSecondSecurityAnswer* <br>
+DB_A3=*yourThirdSecurityAnswer* <br>
+DB_Q1=*yourFirstSecurityQuestion* <br>
+DB_Q2=*yourSecondSecurityQuestion* <br>
 
 *reminder:* The security questions need to include "?"
 
