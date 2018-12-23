@@ -24,7 +24,7 @@ Please create a .env file on the main directory to save your setting.
 You can visit the link below if you don't get it.
 https://www.npmjs.com/package/dotenv
 
-Here's the file format:
+Here's the file format: <br>
 DB_USER=*yourUserName* <br>
 DB_PASS=*yourUserPassword* <br>
 DB_A1=*yourFirstSecurityAnswer* <br>
