@@ -1,10 +1,10 @@
 # FinalScoreML v1.00
 
-###Predict Home win / Draw / Away Win using KNN-model on Javascript
+### Predict Home win / Draw / Away Win using KNN-model on Javascript
 
 
 
-###WARNING: Please DONT USE IT ON REAL GAMES AS IT COULD TAKE ALL YOUR MONEY ###
+### WARNING: Please DONT USE IT ON REAL GAMES AS IT COULD TAKE ALL YOUR MONEY ###
 
 
 
@@ -12,14 +12,14 @@
 This model could ONLY predict which team is going to win, base on odds.(about 65% win rate)
 
 
-###How to use it:###
+### How to use it: ###
 
 1. Path to the directory
 2. node run.js
 3. Pick an action
 4. Enjoy!
 
-###Setting Auto-login:
+### Setting Auto-login:
 
 Please create a .env file on the main directory to save your setting.
 You can visit the link below if you don't get it.
