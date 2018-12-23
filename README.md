@@ -1,6 +1,5 @@
 # FinalScoreML v1.00
-
-### Predict Home win / Draw / Away Win using KNN-model on Javascript
+Predict Home win / Draw / Away Win using KNN-model on Javascript
 
 
 
