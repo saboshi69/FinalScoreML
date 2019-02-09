@@ -6,7 +6,7 @@ Predict Home win / Draw / Away Win using KNN-model on Javascript
 ### WARNING: Please DONT USE IT ON BETTING, IT COULD TAKE ALL YOUR MONEY ###
 
 
-This model could predict which team is going to win, base on odds.(Win rate: 60% ~ 65%)
+This model could predict which team is going to win, base on odds (Win rate: 60% ~ 65%).
 The application supports three services:
 
 1. Knn model testing
