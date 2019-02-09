@@ -3,22 +3,25 @@ Predict Home win / Draw / Away Win using KNN-model on Javascript
 
 
 
-### WARNING: Please DONT USE IT ON REAL GAMES, IT COULD TAKE ALL YOUR MONEY ###
+### WARNING: Please DONT USE IT ON BETTING, IT COULD TAKE ALL YOUR MONEY ###
 
 
+This model could predict which team is going to win, base on odds.(Win rate: 60% ~ 65%)
+The application supports three services:
 
-
-This model could ONLY predict which team is going to win, base on odds.(about 65% win rate)
+1. Knn model testing
+2. Forward testing
+3. Auto Online Bet Placing 
 
 
 ### How to use  ###
 
 1. Path to the directory
-2. `node run`
+2. In your terminal, input `node run`
 3. Pick an action
 4. Enjoy!
 
-### Set up Auto-login
+### Set up Online Auto Bet Placing  on Jockey Club
 
 Please create a .env file on the main directory to save your setting.
 You can visit the link below if you don't get it.
