@@ -1,6 +1,12 @@
 # FinalScoreML v1.00
 Predict Home win / Draw / Away Win using KNN-model on Javascript
 
+### Web version v1.1
+- Improve UI
+
+https://hkfootballml.herokuapp.com/
+
+
 
 
 ### WARNING: Please DONT USE IT ON BETTING, IT COULD TAKE AWAY ALL YOUR MONEY ###
